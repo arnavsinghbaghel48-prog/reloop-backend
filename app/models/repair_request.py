@@ -16,6 +16,9 @@ from app.database import Base
 if TYPE_CHECKING:
     from app.models.user import User
 
+if TYPE_CHECKING:
+    from app.models.repair_image import RepairImage
+
 
 class RepairRequest(Base):
 
@@ -73,3 +76,8 @@ class RepairRequest(Base):
     user: Mapped["User"] = relationship(
         back_populates="repair_requests"
     )
+
+    images: Mapped[list["RepairImage"]] = relationship(
+    back_populates="repair_request",
+    cascade="all, delete-orphan"
+)
