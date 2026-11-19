@@ -16,6 +16,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from app.models.user import User
     from app.models.application import Application
+    from app.models.review import Review
 
 
 class Provider(Base):
@@ -59,6 +60,10 @@ class Provider(Base):
     back_populates="provider"
 )
     applications: Mapped[list["Application"]] = relationship(
+    back_populates="provider",
+    cascade="all, delete-orphan"
+)
+    reviews: Mapped[list["Review"]] = relationship(
     back_populates="provider",
     cascade="all, delete-orphan"
 )
