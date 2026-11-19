@@ -18,6 +18,7 @@ if TYPE_CHECKING:
 
 if TYPE_CHECKING:
     from app.models.repair_image import RepairImage
+    from app.models.application import Application
 
 
 class RepairRequest(Base):
@@ -78,6 +79,10 @@ class RepairRequest(Base):
     )
 
     images: Mapped[list["RepairImage"]] = relationship(
+    back_populates="repair_request",
+    cascade="all, delete-orphan"
+)
+    applications: Mapped[list["Application"]] = relationship(
     back_populates="repair_request",
     cascade="all, delete-orphan"
 )
